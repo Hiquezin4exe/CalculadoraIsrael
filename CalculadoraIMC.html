@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de IMC</title>
+    <script type="text/javascript">
+        function calcularIMC() {
+            var peso = parseFloat(form_imc.peso.value);
+            var altura = parseFloat(form_imc.altura.value);
+
+            if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+                alert("Por favor, insira valores válidos para peso e altura.");
+                return;
+            }
+
+            var imc = peso / (altura * altura);
+
+            form_imc.resultadoIMC.value = imc.toFixed(2);
+            form_imc.classificacao.value = obterClassificacaoIMC(imc);
+        }
+
+        function obterClassificacaoIMC(imc) {
+            if (imc < 18.5) {
+                return "Abaixo do peso";
+            } else if (imc >= 18.5 && imc < 24.9) {
+                return "Peso normal";
+            } else if (imc >= 25 && imc < 29.9) {
+                return "Sobrepeso";
+            } else if (imc >= 30 && imc < 39.9) {
+                return "Obesidade";
+            } else {
+                return "Obesidade grave";
+            }
+        }
+
+        function limpar() {
+            form_imc.peso.value = '';
+            form_imc.altura.value = '';
+            form_imc.resultadoIMC.value = '';
+            form_imc.classificacao.value = '';
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculadora de IMC</h1>
+    <p><mark style="background-color:yellow">Calcule seu IMC</mark></p>
+
+    <form name="form_imc">
+        <label for="peso">Peso (kg): </label>
+        <input name="peso" id="peso" type="text" required><br><br>
+        
+        <label for="altura">Altura (m): </label>
+        <input name="altura" id="altura" type="text" required><br><br>
+
+        <input type="button" onclick="calcularIMC()" value="Calcular IMC"><br><br>
+
+        <label for="resultadoIMC">IMC: </label>
+        <output name="resultadoIMC" id="resultadoIMC"></output><br><br>
+        
+        <label for="classificacao">Classificação: </label>
+        <output name="classificacao" id="classificacao"></output><br><br>
+
+        <input type="button" onclick="limpar()" value="Limpar">
+    </form>
+</body>
+</html>
